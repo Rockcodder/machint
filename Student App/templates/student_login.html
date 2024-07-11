@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login</title>
+</head>
+<body>
+    <h1>Enter Your ID</h1>
+    <form action="/student" method="post">
+        <input type="text" name="id" placeholder="Enter ID" autocomplete="off">
+        <input type="submit" value="Submit">
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>

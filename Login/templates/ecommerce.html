@@ -1,0 +1,28 @@
+<!-- ecommerce.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Categories</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>E-commerce</h1>
+        <div class="navbar">
+            <a href="/cart">Cart</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <div class="cart-item">
+            <h2>Categories</h2>
+            <ul>
+                {% for category in categories %}
+                <li><a href="/products_by_category/{{ category[0] }}">{{ category[1] }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

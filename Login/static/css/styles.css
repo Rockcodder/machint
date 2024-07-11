@@ -1,0 +1,106 @@
+/* styles.css */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Navigation */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Forms */
+form {
+    margin-bottom: 20px;
+}
+
+input[type=email], input[type=password], input[type=text], input[type=number], button {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Product display */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 20px;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.product img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+    float: left;
+}
+
+.product-details {
+    margin-left: 120px;
+}
+
+/* Cart and checkout */
+.cart-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.cart-item img {
+    max-width: 80px;
+    max-height: 80px;
+    margin-right: 10px;
+    float: left;
+}
+
+.total-cost {
+    font-weight: bold;
+    font-size: 18px;
+}

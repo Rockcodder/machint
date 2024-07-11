@@ -1,0 +1,30 @@
+<!-- checkout.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div class="navbar">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <div class="checkout-items">
+            <h2>Order Summary</h2>
+            <ul>
+                {% for item in cart_items %}
+                <li><strong>{{ item[0] }}</strong> - Cost: ${{ item[1] }} x {{ item[2] }} = ${{ item[1] * item[2] }}</li>
+                {% endfor %}
+            </ul>
+            <p>Total Cost: ${{ total_cost }}</p>
+        </div>
+    </div>
+</body>
+</html>

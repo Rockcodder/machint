@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrap">
+            <h1>Login/Signup</h1>
+            <form id="auth-form">
+                <label>Email:</label><br>
+                <input type="email" name="email" required><br>
+                <label>Password:</label><br>
+                <input type="password" name="password" required><br><br>
+                
+                <input type="radio" name="action" value="login" checked> Login
+                <input type="radio" name="action" value="signup"> Signup<br><br>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="form-wrap">
+            <h1>Forgot Password</h1>
+            <form id="forgot-password-form">
+                <label>Email:</label><br>
+                <input type="email" name="email" required><br><br>
+                <input type="submit" value="Send OTP">
+            </form>
+        </div>
+
+        <div class="form-wrap">
+            <h1>Change Password</h1>
+            <form id="change-password-form">
+                <label>Enter OTP:</label><br>
+                <input type="text" name="otp" required><br>
+                <label>New Password:</label><br>
+                <input type="password" name="new_password" required><br><br>
+                <input type="submit" value="Change Password">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#auth-form').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var action = $('input[name="action"]:checked').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/authenticate',
+                    data: formData,
+                    success: function(response) {
+                        if (response.redirect) {
+                            alert('Login successful!');
+                            $('#auth-form')[0].reset();
+                            window.location.href = response.redirect;
+                        } else if (response.message) {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Error: ' + xhr.statusText;
+                        alert(errorMessage);
+                    }
+                });
+            });
+
+            $('#forgot-password-form').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/forgot_password',
+                    data: formData,
+                    success: function(response) {
+                        alert(response.message);
+                        $('#forgot-password-form')[0].reset();
+                        // Redirect or show OTP input
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Error: ' + xhr.statusText;
+                        alert(errorMessage);
+                    }
+                });
+            });
+
+            $('#change-password-form').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/change_password',
+                    data: formData,
+                    success: function(response) {
+                        alert(response.message);
+                        $('#change-password-form')[0].reset();
+                        // Redirect to login page or show success message
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Error: ' + xhr.statusText;
+                        alert(errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

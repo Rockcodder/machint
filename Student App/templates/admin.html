@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students Details</title>
+</head>
+<body>
+    <h1>All Students' Details</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Marks</th>
+            <th>Result</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td align="right">{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td align="right">{{ student.marks }}</td>
+            <td>{{ student.result }}</td>
+            <td align="center">
+                <form action="/delete_student" method="post">
+                    <input type="hidden" name="student_id" value="{{ student.id }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{{ url_for('add_student') }}">Add Student</a>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- products_by_category.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products by Category</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Products in {{ category_name }}</h1>
+        <div class="navbar">
+            <a href="/">Home</a>
+            <a href="/cart">Cart</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product">
+                <img src="{{ url_for('static', filename=product[4]) }}" alt="{{ product[1] }}">
+                <div class="product-details">
+                    <h2>{{ product[1] }}</h2>
+                    <p>{{ product[2] }}</p>
+                    <p>Price: ${{ product[3] }}</p>
+                    <form class="add-to-cart-form">
+                        <input type="hidden" name="product_id" value="{{ product[0] }}">
+                        <input type="number" name="quantity" value="1" min="1" required>
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+</html>
